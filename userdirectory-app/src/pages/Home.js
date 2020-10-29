@@ -14,43 +14,13 @@ const Home = () => {
 
 
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
     const [dob, setDob] = useState('');
-    const [picture, setPicture] = useState('');
-
    
     useEffect(() => {
         API.getUsers()
-        .then(res => 
-          setName(res.data.results)
-        )
-        .catch(err => console.log(err));
-        
-    },[])
-    useEffect(() => {
-        API.getUsers()
-        .then(res => setPicture(res.data.results))
-        .catch(err => console.log(err),
-        console.log(setPicture()))
-      
-    }, [])
-
-    useEffect(() => {
-        API.getUsers()
-        .then(res => 
-          setEmail(res.data.results)
-        )
-        .catch(err => console.log(err));
-        
-    },[])
-    useEffect(() => {
-        API.getUsers()
-        .then(res => 
-          setDob(res.data.results)
-        )
-        .catch(err => console.log(err));
-        
-    },[])
+          .then((res) => console.log(res.data.results))
+          .catch((err) => console.log(err));
+      }, []);
 
     const handleInputChange = event => {
         const { value } = event.target;
