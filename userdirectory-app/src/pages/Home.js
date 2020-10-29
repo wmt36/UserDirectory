@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { render } from "react-dom";
+import { render, Switch  } from "react-dom";
 import API from '../utils/API'
 import Container from '../components/Container';
 import Col from '../components/Col';
 import Row from '../components/Row';
 import Btn from '../components/Btn';
 import Jumbotron from '../components/Jumbotron';
+import List from '../components/List';
+
 
 
 
@@ -21,18 +23,24 @@ const Home = () => {
           .then((res) => console.log(res.data.results))
           .catch((err) => console.log(err));
       }, []);
+      
 
     const handleInputChange = event => {
-        const { value } = event.target;
+        const {name, value } = event.target;
         setName(value)
 
     }
+    
     
      
       
 const handleSubmit = e => {
           e.preventDefault();
           console.log("name is " + name);
+          API.getUsers()
+          .then((res) => setName(res.data.results))
+          .catch((err) => console.log(err));
+          
     
         };
     
@@ -55,44 +63,15 @@ return (
                 onClick={handleSubmit}
                 type="success"
                 className="input-lg"
-                >Search</Btn>
+                >Search</Btn>  
+                          
               </Col>
-            </Row>
-    
+            </Row>    
         </Container>
         </form>
-        <Container>
-        <Row className="form-group">
-      
     
-            <tr>
-            <Col size="12">
-
-     <table className="table table-striped table-dark" size='12'>
-        <thead>
-            <tr>
-             <th scope="col">Picture</th>
-             <th scope="col">Name</th>
-             <th scope="col">E-mail</th>
-             <th scope="col">D.O.B</th>
-            </tr>
-        </thead>
-    <tbody>
-            <tr>
-             <th scope="row">1</th>
-             <td>Mark</td>
-             <td>Otto</td>
-             <td>@mdo</td>
-            </tr>
-    </tbody>
-    </table>
-             </Col>
-          </tr>
-        
-        
-        </Row>        
-      </Container>
-      </div>
+    
+       </div>
       
     );
 
