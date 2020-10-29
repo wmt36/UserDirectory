@@ -6,18 +6,19 @@ import Col from '../components/Col';
 import Row from '../components/Row';
 import Btn from '../components/Btn';
 import Jumbotron from '../components/Jumbotron';
-import List from '../components/List';
+
 
 
 
 const Home = () => {
 
 
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [dob, setDob] = useState();
-    const [picture, setPicture] = useState();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [dob, setDob] = useState('');
+    const [picture, setPicture] = useState('');
 
+   
     useEffect(() => {
         API.getUsers()
         .then(res => 
@@ -26,6 +27,36 @@ const Home = () => {
         .catch(err => console.log(err));
         
     },[])
+    useEffect(() => {
+        API.getUsers()
+        .then(res => setPicture(res.data.results))
+        .catch(err => console.log(err),
+        console.log(setPicture()))
+      
+    }, [])
+
+    useEffect(() => {
+        API.getUsers()
+        .then(res => 
+          setEmail(res.data.results)
+        )
+        .catch(err => console.log(err));
+        
+    },[])
+    useEffect(() => {
+        API.getUsers()
+        .then(res => 
+          setDob(res.data.results)
+        )
+        .catch(err => console.log(err));
+        
+    },[])
+
+    const handleInputChange = event => {
+        const { value } = event.target;
+        setName(value)
+
+    }
     
      
       
@@ -47,11 +78,10 @@ return (
                 <input
                   className="form-control"
                   type="text"
-                  placeholder="Serach by Name"
+                  value={name}
                   name="name"
-                  onChange={e => setName(e.target.value)}
-                />
-              <Btn
+                  onChange={handleInputChange}
+                /><Btn
                 onClick={handleSubmit}
                 type="success"
                 className="input-lg"
@@ -64,13 +94,31 @@ return (
         <Container>
         <Row className="form-group">
       
-        <table>
+    
             <tr>
-            <Col size="4">
-        
+            <Col size="12">
+
+     <table className="table table-striped table-dark" size='12'>
+        <thead>
+            <tr>
+             <th scope="col">Picture</th>
+             <th scope="col">Name</th>
+             <th scope="col">E-mail</th>
+             <th scope="col">D.O.B</th>
+            </tr>
+        </thead>
+    <tbody>
+            <tr>
+             <th scope="row">1</th>
+             <td>Mark</td>
+             <td>Otto</td>
+             <td>@mdo</td>
+            </tr>
+    </tbody>
+    </table>
              </Col>
           </tr>
-        </table>
+        
         
         </Row>        
       </Container>
