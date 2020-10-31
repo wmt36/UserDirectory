@@ -2,7 +2,7 @@ import React, {createContext, useReducer, useContext } from 'react';
 import {
 SEARCH_LIST,
 SORT_LIST
-} from '../utils/actions'
+} from './actions'
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;

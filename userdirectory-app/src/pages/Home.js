@@ -12,18 +12,12 @@ import Jumbotron from '../components/Jumbotron';
 
 
 
-const Home = ({ picture, name, email, dob }) => {
+const Home = () => {
 
 
     const [nameSearch, setNameSearch] = useState('');
-    //const [dob, setDob] = useState('');
    
-    useEffect(() => {
-        API.getUsers()
-          .then((res) => console.log(res.data.results))
-          .catch((err) => console.log(err));
-      }, []);
-      
+ 
 
     const handleInputChange = event => {
         const { value } = event.target;
@@ -34,15 +28,13 @@ const Home = ({ picture, name, email, dob }) => {
     
      
       
-const handleSubmit = e => {
+const HandleSubmit = e => {
           e.preventDefault();
           console.log("name is " + nameSearch);
-          API.getUsers()
-          .then((res) => setNameSearch(res.data.results))
-          .catch((err) => console.log(err));
-          
-    
-        };
+            API.getUsers(nameSearch)
+              .then((res) => console.log(res.data.results))
+              .catch((err) => console.log(err));
+      };
     
 return (
         <div>
@@ -61,7 +53,7 @@ return (
                   name="nameSearch"
                   onChange={handleInputChange}
                 /><Btn
-                onClick={handleSubmit}
+                onClick={HandleSubmit}
                 type="success"
                 className="input-lg"
                 >Search</Btn>  
@@ -83,13 +75,17 @@ return (
                 </tr>
             </thead>
             <tbody>
+              {/* {nameSearch.map(users => {
+                return (
                 <tr>
-                 <th scope="row"><image image={picture}/></th>
-                 <td>{name}</td>
-                 <td>{email}</td>
-                 <td>{dob}</td>
+                 <th scope="row"><img image={users.picture}/></th>
+                 <td>{users.name}</td>
+                 <td>{users.email}</td>
+                 <td>{users.dob}</td>
                 </tr>
-            </tbody>
+                );
+                })}; */}
+            </tbody> 
             </table>          
         </Col>        
     </Container>
@@ -101,4 +97,3 @@ return (
 
 
 export default Home ;
-  
