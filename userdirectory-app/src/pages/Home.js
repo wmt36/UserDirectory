@@ -25,6 +25,11 @@ const Home = () => {
 
     }
     
+    useEffect(() => {
+      API.getUsers()
+        .then((res) => console.log(res.data.results))
+        .catch((err) => console.log(err));
+    }, []);
     
      
       
