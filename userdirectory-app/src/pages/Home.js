@@ -17,11 +17,11 @@ import { EmployeeList, EmployeeListItem } from '../components/List';
 const Home = () => {
 
 
-    const [nameSearch, setNameSearch] = useState('', false);
+    const [nameSearch, setNameSearch] = useState('');
     const [employee, setEmployee] = useState([]);
    
     useEffect(() => {
-      API.getUsers(employee)
+      API.getUsers()
         .then(res => setEmployee(res.data.results))
         .catch((err) => console.log(err));
     }, []);
@@ -30,7 +30,7 @@ const Home = () => {
 
     const handleInputChange = event => {
         const { value } = event.target;
-        setNameSearch(value, true)
+        setNameSearch(value)
 
     }   
     
@@ -53,7 +53,7 @@ return (
         <form>
           <Container className="mt-3 px-5">
             <Row className="form-group">
-              <Col size="12">
+            
                 <input
                   className="form-control"
                   type="text"
@@ -66,30 +66,31 @@ return (
                 className="input-lg"
                 >Search</Btn>  
                           
-              </Col>
+              
             </Row>    
         </Container>
         </form>
         
-          <Col size="xs-12">
+          <Row size="xs-12">
            
-              {employee.map(users => {
-                return(
-                  <EmployeeList>
+            <EmployeeList>
+              {employee.map(({name, email, picture, dob }) => {
+                return( 
                     <EmployeeListItem>
-                    picture={users.picture}
-                    name={users.name}
-                    email={users.email}
-                    dob={users.dob}
+                    key={name}
+                    picture={picture}
+                    name={name.first}
+                    email={email}
+                    dob={dob}
                     </EmployeeListItem> 
-                    </EmployeeList>
                 )
               })}
+              </EmployeeList>
               
-           
+            
              
             
-        </Col>        
+        </Row>        
     </Container>
        </div>
       
