@@ -1,7 +1,9 @@
 import axios from 'axios';
-export default {
-  // Gets all users
+
+
+const users = {
   getUsers: function() {
-    return axios.get('https://randomuser.me/api/?results=5&nat=us');
-  }
-};
+  return axios.get('https://randomuser.me/api/?results=5&nat=us');
+}};
+
+export default users;

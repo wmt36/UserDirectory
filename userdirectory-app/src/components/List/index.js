@@ -1,12 +1,10 @@
 import React from "react";
-import Container from "../Container";
-import Row from "../Row";
-import Col from "../Col";
+
 
 // Exporting both RecipeList and RecipeListItem from this file
 
 // EmployeeList renders a bootstrap list item
-export function EmployeeList({  }) {
+export function EmployeeList() {
   return  <table className="table table-bordered table-dark">
   <thead>
       <tr>
@@ -30,7 +28,7 @@ export function EmployeeListItem({
    
     <tbody>  
         <tr>
-         <th scope="row"><img image={picture}/></th>
+         <td><img image={picture} alt=""/></td>
          <td>{name}</td>
          <td>{email}</td>
          <td>{dob}</td>

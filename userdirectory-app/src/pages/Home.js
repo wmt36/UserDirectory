@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { render, Switch  } from "react-dom";
 import API from '../utils/API'
 import Container from '../components/Container';
-import Col from '../components/Col';
 import Row from '../components/Row';
 import Btn from '../components/Btn';
 import Jumbotron from '../components/Jumbotron';
@@ -17,16 +15,18 @@ import { EmployeeList, EmployeeListItem } from '../components/List';
 const Home = () => {
 
 
-    const [nameSearch, setNameSearch] = useState('');
+    const [nameSearch, setNameSearch] = useState(''); 
     const [employee, setEmployee] = useState([]);
    
     useEffect(() => {
+      loadNames()
+    }, []); 
+
+    function loadNames() {
       API.getUsers()
-        .then(res => setEmployee(res.data.results))
-        .catch((err) => console.log(err));
-    }, []);
-
-
+      .then(res => setEmployee(res.data.results))
+      .catch((err) => console.log(err));
+    }
 
     const handleInputChange = event => {
         const { value } = event.target;
