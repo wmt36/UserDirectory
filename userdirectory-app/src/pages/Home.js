@@ -4,7 +4,8 @@ import Container from '../components/Container';
 import Row from '../components/Row';
 import Btn from '../components/Btn';
 import Jumbotron from '../components/Jumbotron';
-import { EmployeeList, EmployeeListItem } from '../components/List';
+import EmployeeList from '../components/EmployeeList';
+import EmployeeListItem from '../components/EmployeeListItem'; 
 
 
 
@@ -40,7 +41,7 @@ const HandleSubmit = e => {
           e.preventDefault();
           console.log("name is " + nameSearch);
             API.getUsers(nameSearch)
-              .then(res => console.log(res.data.results))
+              .then(res => setNameSearch(res.data.results))
               .catch((err) => console.log(err));
       };
     
@@ -74,15 +75,15 @@ return (
           <Row size="xs-12">
            
             <EmployeeList>
-              {employee.map(({name, email, picture, dob }) => {
+              {employee.map(({name, email, picture, dob }, index ) => {
                 return( 
-                    <EmployeeListItem>
-                    key={name}
+                    <EmployeeListItem
+                    key={index}
                     picture={picture}
                     name={name.first}
                     email={email}
                     dob={dob}
-                    </EmployeeListItem> 
+                    /> 
                 )
               })}
               </EmployeeList>
