@@ -41,7 +41,7 @@ const HandleSubmit = e => {
           e.preventDefault();
           console.log("name is " + nameSearch);
             API.getUsers(nameSearch)
-              .then(res => setNameSearch(res.data.results))
+              .then(res => console.log(res.data.results))
               .catch((err) => console.log(err));
       };
     
