@@ -4,8 +4,7 @@ import Container from '../components/Container';
 import Row from '../components/Row';
 import Btn from '../components/Btn';
 import Jumbotron from '../components/Jumbotron';
-import EmployeeList from '../components/EmployeeList';
-import EmployeeListItem from '../components/EmployeeListItem'; 
+import EmployeeList from '../components/EmployeeList'; 
 
 
 
@@ -20,14 +19,10 @@ const Home = () => {
     const [employee, setEmployee] = useState([]);
    
     useEffect(() => {
-      loadNames()
-    }, []); 
-
-    function loadNames() {
       API.getUsers()
       .then(res => setEmployee(res.data.results))
       .catch((err) => console.log(err));
-    }
+    }, []); 
 
     const handleInputChange = event => {
         const { value } = event.target;
@@ -41,7 +36,7 @@ const HandleSubmit = e => {
           e.preventDefault();
           console.log("name is " + nameSearch);
             API.getUsers(nameSearch)
-              .then(res => setNameSearch(res.data.results))
+              .then(res => console.log(res.data.results))
               .catch((err) => console.log(err));
       };
     
@@ -72,26 +67,9 @@ return (
         </Container>
         </form>
         
-          <Row size="xs-12">
-           
-            <EmployeeList>
-              {employee.map(({name, email, picture, dob }, index ) => {
-                return( 
-                    <EmployeeListItem
-                    key={index}
-                    picture={picture}
-                    name={name.first}
-                    email={email}
-                    dob={dob}
-                    /> 
-                )
-              })}
-              </EmployeeList>
-              
-            
-             
-            
-        </Row>        
+         
+         <EmployeeList /> 
+    
     </Container>
        </div>
       
