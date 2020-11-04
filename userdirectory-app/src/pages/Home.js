@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Wrapper from "../components/Wrapper";
 import API from '../utils/API'
 import Container from '../components/Container';
 import Row from '../components/Row';
@@ -15,7 +16,6 @@ import EmployeeList from '../components/EmployeeList';
 const Home = () => {
 
 
-    const [nameSearch, setNameSearch] = useState(''); 
     const [employee, setEmployee] = useState([]);
    
     useEffect(() => {
@@ -25,8 +25,10 @@ const Home = () => {
     }, []); 
 
     const handleInputChange = event => {
-        const { value } = event.target;
-        setNameSearch(value)
+        // const { value } = event.target.value;
+        // const filterEmp = setEmployee.filter((employee) => 
+        // employee.name.first.indexOf(value) > -1 );
+        // setEmployee({ filterEmp })        
 
     }   
     
@@ -34,14 +36,15 @@ const Home = () => {
       
 const HandleSubmit = e => {
           e.preventDefault();
-          console.log("name is " + nameSearch);
-            API.getUsers(nameSearch)
-              .then(res => console.log(res.data.results))
+            API.getUsers(employee)
+              .then(res => setEmployee(res.data.results))
               .catch((err) => console.log(err));
+
       };
     
 return (
         <div>
+          <Wrapper>
       <Container className="mt-3 px-5">
        
         <Jumbotron /> 
@@ -53,11 +56,12 @@ return (
                 <input
                   className="form-control"
                   type="text"
-                  value={nameSearch}
+                  aria-describedby="search"
                   name="nameSearch"
                   onChange={handleInputChange}
                 /><Btn
                 onClick={HandleSubmit}
+                id="search"
                 type="success"
                 className="input-lg"
                 >Search</Btn>  
@@ -71,6 +75,7 @@ return (
          <EmployeeList /> 
     
     </Container>
+    </Wrapper>
        </div>
       
     );

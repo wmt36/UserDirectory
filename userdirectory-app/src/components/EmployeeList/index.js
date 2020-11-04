@@ -8,7 +8,7 @@ export function EmployeeList() {
     
     
     const header = ['Pic','Name', 'Email', 'D.O.B']
-    const rows = employee
+    
 
     useEffect(() => {
         API.getUsers()
@@ -25,13 +25,16 @@ export function EmployeeList() {
                 <th scope="col" key={i}>{headers}</th>
             )}
             </tr>
-            <tr>
-                
-             {rows.map((name, i ) => 
-                <td key={i}>{name}</td>
-            )}
-                
+            {employee.map(emp => (
+            <tr key={emp.login.uuid}>
+                <td><img src={emp.picture.medium}></img></td>
+                <td>{emp.name.first + ' ' + emp.name.last}</td>
+                <td>{emp.email}</td>
+                <td>{emp.dob.date.split('T') [0]}</td>
             </tr>
+            ))}
+           
+            
         </tbody>
     </table>  
     );
