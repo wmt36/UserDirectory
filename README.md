@@ -1,6 +1,8 @@
 # UserDirectory
 # Unit 19 React Homework: Employee Directory
 
+
+Disclaimer i created this file in github and pulled it down to my local computer before creating the react app within this directory, and ifyou look on the tag line it will show you i have made numerous commits to this repo but it has tallied on my over contributon amount due to the fact that the actual React app file is located in this overall Repo.
 ## Overview
 
 For this assignment, you'll create a employee directory with React. This assignment will require you to break up your application's UI into components, manage component state, and respond to user events.
